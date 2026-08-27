@@ -131,13 +131,14 @@ const InputForm: React.FC<Props> = ({
     setTimeout(() => setActivePresetNotification(null), 3000);
   };
 
-  const handleSmartImport = (importedValues: Record<string, string>, patient?: Partial<PatientContext>) => {
+  const handleSmartImport = (
+    importedValues: Record<string, string>,
+    detectedPatientName?: string,
+    _date?: string
+  ) => {
     setValues((prev) => ({ ...prev, ...importedValues }));
-    if (patient) {
-      if (patient.name) setPatientName(patient.name);
-      if (patient.age) setPatientAge(String(patient.age));
-      if (patient.sex) setPatientSex(patient.sex);
-      if (patient.context) setPatientContext(patient.context);
+    if (detectedPatientName) {
+      setPatientName(detectedPatientName);
       setShowDemographics(true);
     }
     const count = Object.keys(importedValues).length;
