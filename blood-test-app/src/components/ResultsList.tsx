@@ -8,6 +8,9 @@ import CrossTestCard from './CrossTestCard';
 import TrendChart from './TrendChart';
 import PatientHeader from './PatientHeader';
 import AiInsightsCard from './AiInsightsCard';
+import OrganSystemsMap from './OrganSystemsMap';
+import LifestylePlanCard from './LifestylePlanCard';
+import WhatIfSimulator from './WhatIfSimulator';
 import {
   MessageSquareQuote,
   Filter,
@@ -116,13 +119,22 @@ const ResultsList: React.FC<Props> = ({
         </div>
       )}
 
+      {/* Biological Organ Systems Map */}
+      <OrganSystemsMap analysis={result.analysis} />
+
       {/* "התמונה הכוללת" - Multi-Biomarker Combinations */}
       {result.contextFindings.length > 0 && (
         <CrossTestCard findings={result.contextFindings} />
       )}
 
+      {/* Evidence-based Lifestyle & Nutrition Plan */}
+      <LifestylePlanCard result={result} patient={result.patient} />
+
       {/* "מגמות ושינויים" - Historical Trend Deltas */}
       {result.trends.length > 0 && <TrendChart trends={result.trends} />}
+
+      {/* What-If Lab Value Simulator */}
+      <WhatIfSimulator initialResult={result} patient={result.patient} />
 
       {/* Filter and Accordion Control Bar */}
       <div className="results__toolbar no-print">

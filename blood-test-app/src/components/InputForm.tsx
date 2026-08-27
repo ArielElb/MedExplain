@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { Biomarker, DemoPreset, PatientContext } from '../types';
 import { DEMO_PRESETS } from '../data/biomarkers';
+import SmartPasteModal from './SmartPasteModal';
 import {
   FlaskConical,
   RotateCcw,
@@ -13,6 +14,7 @@ import {
   Filter,
   Check,
   User,
+  FileText,
 } from 'lucide-react';
 
 interface Props {
@@ -42,6 +44,7 @@ const InputForm: React.FC<Props> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activePresetNotification, setActivePresetNotification] = useState<string | null>(null);
   const [previousValuesState, setPreviousValuesState] = useState<Record<string, number> | undefined>(undefined);
+  const [isSmartPasteOpen, setIsSmartPasteOpen] = useState(false);
 
   useEffect(() => {
     if (initialValues && Object.keys(initialValues).length > 0) {
@@ -128,6 +131,20 @@ const InputForm: React.FC<Props> = ({
     setTimeout(() => setActivePresetNotification(null), 3000);
   };
 
+  const handleSmartImport = (importedValues: Record<string, string>, patient?: Partial<PatientContext>) => {
+    setValues((prev) => ({ ...prev, ...importedValues }));
+    if (patient) {
+      if (patient.name) setPatientName(patient.name);
+      if (patient.age) setPatientAge(String(patient.age));
+      if (patient.sex) setPatientSex(patient.sex);
+      if (patient.context) setPatientContext(patient.context);
+      setShowDemographics(true);
+    }
+    const count = Object.keys(importedValues).length;
+    setActivePresetNotification(`יובאו בהצלחה ${count} מדדים מטופס הבדיקה!`);
+    setTimeout(() => setActivePresetNotification(null), 3500);
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const patientObj: PatientContext | undefined =
@@ -163,32 +180,44 @@ const InputForm: React.FC<Props> = ({
   };
 
   return (
-    <form className="card form-card no-print" onSubmit={handleSubmit}>
-      {/* Form Header */}
-      <div className="card__header form-card__header">
-        <div className="form-card__title-group">
-          <h2>
-            <FlaskConical size={24} className="icon-flask" /> הזנת ערכי בדיקות דם
-          </h2>
-          <p className="form-card__subtitle">
-            הזינו את הערכים המופיעים בטופס הבדיקה שלכם (אין חובה למלא הכל — מספיק מדד אחד).
-          </p>
-        </div>
+    <>
+      <form className="card form-card no-print" onSubmit={handleSubmit}>
+        {/* Form Header */}
+        <div className="card__header form-card__header">
+          <div className="form-card__title-group">
+            <h2>
+              <FlaskConical size={24} className="icon-flask" /> הזנת ערכי בדיקות דם
+            </h2>
+            <p className="form-card__subtitle">
+              הזינו את הערכים המופיעים בטופס הבדיקה שלכם (אין חובה למלא הכל — מספיק מדד אחד).
+            </p>
+          </div>
 
-        <div className="form-card__badges">
-          <button
-            type="button"
-            className="btn--ghost btn--small"
-            onClick={() => setShowDemographics(!showDemographics)}
-          >
-            <User size={15} />
-            <span>{showDemographics ? 'הסתר פרטי מטופל/ת' : 'הוסף פרטי מטופל/ת'}</span>
-          </button>
-          <span className={`badge ${filledCount > 0 ? 'badge--primary-filled' : 'badge--muted'}`}>
-            {filledCount} מתוך {markers.length} מדדים הוזנו
-          </span>
+          <div className="form-card__badges">
+            <button
+              type="button"
+              className="btn--smart-paste-trigger"
+              onClick={() => setIsSmartPasteOpen(true)}
+              title="הדבק טקסט של בדיקת דם מכללית/מכבי/PDF לייבוא מהיר"
+            >
+              <FileText size={15} />
+              <span>הדבק טופס מקופת חולים</span>
+              <Sparkles size={12} className="text-amber" />
+            </button>
+
+            <button
+              type="button"
+              className="btn--ghost btn--small"
+              onClick={() => setShowDemographics(!showDemographics)}
+            >
+              <User size={15} />
+              <span>{showDemographics ? 'הסתר פרטי מטופל/ת' : 'הוסף פרטי מטופל/ת'}</span>
+            </button>
+            <span className={`badge ${filledCount > 0 ? 'badge--primary-filled' : 'badge--muted'}`}>
+              {filledCount} מתוך {markers.length} מדדים הוזנו
+            </span>
+          </div>
         </div>
-      </div>
 
       {/* Patient Demographics Optional Bar */}
       {showDemographics && (
@@ -461,6 +490,13 @@ const InputForm: React.FC<Props> = ({
         )}
       </div>
     </form>
+
+    <SmartPasteModal
+      isOpen={isSmartPasteOpen}
+      onClose={() => setIsSmartPasteOpen(false)}
+      onImport={handleSmartImport}
+    />
+  </>
   );
 };
 
