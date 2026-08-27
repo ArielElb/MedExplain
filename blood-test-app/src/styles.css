@@ -2107,6 +2107,248 @@ p {
   margin: 0.75rem 0;
 }
 
+/* Result Card Content & Interpretation */
+.result__content {
+  margin: 0.85rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.result__message-box {
+  background: var(--subcard-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+}
+
+.result__message {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.result__urgency-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--warning-light);
+  border: 1px solid var(--warning-border);
+  color: var(--warning-text);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+[data-theme="dark"] .result__urgency-box {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fde68a;
+}
+
+/* Detail Accordion ("מה המדד בודק ומה עשוי להשפיע עליו") */
+.result__detail-accordion {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: 0.65rem;
+  background: var(--card-bg);
+  transition: var(--transition-base);
+}
+
+.result__detail-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--subcard-bg);
+  border: none;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-align: right;
+  transition: var(--transition-fast);
+}
+
+.result__detail-toggle:hover {
+  background: var(--pill-bg);
+  color: var(--text);
+}
+
+.detail-toggle-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result__detail-body {
+  padding: 0.9rem;
+  border-top: 1px solid var(--card-border);
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.detail-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detail-sub-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.detail-sub-text {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.detail-reasons-list {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* Collapsible Doctor Questions Accordion */
+.result__accordion {
+  margin-top: 0.65rem;
+  border: 1px solid var(--primary-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+[data-theme="dark"] .result__accordion {
+  border-color: rgba(2, 132, 199, 0.35);
+}
+
+.result__accordion-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-light);
+  padding: 0.55rem 0.85rem;
+  gap: 8px;
+}
+
+[data-theme="dark"] .result__accordion-header-row {
+  background: rgba(2, 132, 199, 0.12);
+}
+
+.result__accordion-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  cursor: pointer;
+  color: var(--primary-dark);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+[data-theme="dark"] .result__accordion-toggle-btn {
+  color: #38bdf8;
+}
+
+.result__accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn--copy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-fast);
+}
+
+.btn--copy-pill:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.result__accordion-content {
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--primary-border);
+  background: var(--card-bg);
+}
+
+[data-theme="dark"] .result__accordion-content {
+  border-top-color: rgba(2, 132, 199, 0.2);
+}
+
+.result__questions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.result__question-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.question-bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .question-bullet {
+  background: rgba(2, 132, 199, 0.25);
+  color: #38bdf8;
+}
+
+.question-text {
+  flex: 1;
+}
+
 /* ==========================================================================
    Range Gauge Indicator (Rock-Solid LTR System & Beautiful Visuals)
    ========================================================================== */
@@ -2149,6 +2391,8 @@ p {
   width: 100%;
   margin: 1.8rem 0 1.2rem;
   padding: 0 4px;
+  direction: ltr;
+  text-align: left;
 }
 
 .gauge__track {
@@ -2159,6 +2403,7 @@ p {
   overflow: hidden;
   background: var(--pill-bg);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  direction: ltr;
 }
 
 [data-theme="dark"] .gauge__track {
@@ -2210,6 +2455,7 @@ p {
   pointer-events: none;
   z-index: 10;
   transition: left 0.3s ease;
+  direction: ltr;
 }
 
 .gauge__pin-badge {
@@ -2257,6 +2503,8 @@ p {
   width: 100%;
   height: 18px;
   margin-top: 6px;
+  direction: ltr;
+  text-align: left;
 }
 
 .gauge__tick {
