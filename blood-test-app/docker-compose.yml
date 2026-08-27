@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: blood-test-app
+    restart: unless-stopped
+    ports:
+      - "5173:80"
