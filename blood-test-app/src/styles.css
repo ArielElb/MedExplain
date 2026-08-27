@@ -7496,7 +7496,7 @@ p {
 /* Tablets & Small Laptops (<= 992px) */
 @media screen and (max-width: 992px) {
   .hero h1 {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
   .organ-systems-grid {
@@ -7506,79 +7506,126 @@ p {
   .sliders-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .summary-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Mobile Devices (<= 768px) */
+/* Mobile Devices (<= 768px) — Clean, Compact & Cohesive Clinical UI */
 @media screen and (max-width: 768px) {
   :root {
-    --navbar-height: 56px;
+    --navbar-height: 54px;
   }
 
   body {
-    font-size: 15px;
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 75px);
+    font-size: 14px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 70px);
   }
 
   .container {
-    padding: 0 0.75rem;
+    padding: 0 0.65rem;
+    max-width: 100%;
   }
 
-  /* Sticky Tabs on Mobile */
+  /* Universal Compact Card Styling on Mobile */
+  .card,
+  .result,
+  .patient-header-card,
+  .summary-card,
+  .ai-insights-card,
+  .export-bar-card,
+  .attention-card,
+  .cross-test-section,
+  .trend-section,
+  .organ-systems-card,
+  .lifestyle-plan-card,
+  .what-if-card,
+  .general-questions-card,
+  .scenario-card,
+  .form-card {
+    border-radius: 12px !important;
+    padding: 0.85rem !important;
+    margin-bottom: 0.75rem !important;
+    box-shadow: var(--shadow-xs) !important;
+  }
+
+  /* Universal Section Titles on Mobile */
+  .patient-header__name,
+  .summary-card__title-group h2,
+  .ai-insights-title,
+  .attention-card__title,
+  .cross-test-title,
+  .trend-title,
+  .organ-systems-title,
+  .lifestyle-title,
+  .what-if-title,
+  .result__title,
+  .scenario-card__title {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Sticky Results View Tabs */
   .results-view-tabs-container {
-    top: 56px;
-    padding: 6px 0 8px;
-    margin-bottom: 0.85rem;
+    top: 54px;
+    padding: 4px 0 6px;
+    margin-bottom: 0.65rem;
   }
 
   .results-view-tab {
-    padding: 0.42rem 0.8rem;
-    font-size: 0.8rem;
+    padding: 0.38rem 0.75rem;
+    font-size: 0.78rem;
+    gap: 5px;
+  }
+
+  .tab-pill-badge {
+    font-size: 0.68rem;
+    padding: 1px 5px;
   }
 
   /* Hero Section */
   .hero {
-    padding: 1.25rem 0 0.85rem;
+    padding: 1rem 0 0.65rem;
     text-align: center;
   }
 
   .hero h1 {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
     line-height: 1.25;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
   }
 
   .hero p {
-    font-size: 0.88rem;
-    line-height: 1.5;
+    font-size: 0.84rem;
+    line-height: 1.45;
   }
 
   .hero__badges {
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
   }
 
   /* Patient Header on Mobile */
   .patient-header-card {
-    padding: 0.85rem;
+    padding: 0.75rem 0.85rem !important;
   }
 
   .patient-header__main {
-    gap: 10px;
+    gap: 8px;
+    align-items: center;
   }
 
   .patient-header__avatar {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
   }
 
   .patient-header__title-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
-  }
-
-  .patient-header__name {
-    font-size: 1.15rem;
+    gap: 4px;
   }
 
   .patient-header__demographics {
@@ -7587,98 +7634,264 @@ p {
     gap: 4px;
   }
 
-  /* AI Insights Card on Mobile */
-  .ai-insights-card {
-    padding: 0.9rem 0.85rem;
+  .demographic-pill {
+    font-size: 0.72rem;
+    padding: 1px 6px;
   }
 
-  .ai-insights-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  .patient-header__context {
+    font-size: 0.8rem;
+    line-height: 1.35;
+    margin-top: 2px;
   }
 
-  .ai-insights-actions {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
+  .patient-header__tags {
+    gap: 4px;
+    margin-top: 2px;
   }
 
-  .btn--ask-ai {
-    flex: 1;
-    justify-content: center;
-    font-size: 0.82rem;
-    padding: 0.5rem 0.8rem;
-  }
-
-  .ai-point-text {
-    font-size: 0.85rem;
+  .context-tag-pill {
+    font-size: 0.7rem;
+    padding: 1px 5px;
   }
 
   /* Summary Card on Mobile */
-  .summary-card {
-    padding: 0.85rem;
-  }
-
   .summary-card__header {
-    flex-direction: column;
-    align-items: flex-start;
+    margin-bottom: 0.65rem;
     gap: 4px;
   }
 
-  .summary-grid {
+  .summary-banner {
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 0.75rem;
+    gap: 8px;
+    border-radius: 8px;
+  }
+
+  .summary-headline-main {
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  .summary-meter {
+    padding: 0.55rem 0.75rem;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+  }
+
+  .summary-meter__header {
+    font-size: 0.74rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .summary-meter__bar {
+    height: 8px;
+  }
+
+  .summary-stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 6px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
   }
 
-  .summary-tile {
-    padding: 0.6rem 0.4rem;
-    text-align: center;
+  .stat-card {
+    padding: 0.5rem 0.65rem !important;
+    gap: 8px !important;
+    border-radius: 8px !important;
   }
 
-  .summary-tile__val {
-    font-size: 1.35rem;
+  .stat-card__icon-wrap {
+    width: 28px;
+    height: 28px;
   }
 
-  .summary-tile__label {
-    font-size: 0.72rem;
+  .stat-card__val {
+    font-size: 1.2rem !important;
+  }
+
+  .stat-card__label {
+    font-size: 0.7rem !important;
+  }
+
+  /* AI Insights Card on Mobile */
+  .ai-insights-header {
+    gap: 8px;
+  }
+
+  .ai-badge-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .btn--ask-ai {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .ai-insights-body {
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+  }
+
+  .ai-narrative-list {
+    gap: 0.5rem;
+  }
+
+  .ai-point-text {
+    font-size: 0.82rem;
+    line-height: 1.4;
   }
 
   /* Export Bar on Mobile (2x2 Grid) */
   .export-bar-card {
-    padding: 0.75rem 0.85rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    padding: 0.65rem 0.85rem !important;
+    gap: 6px;
+  }
+
+  .export-bar-card__label {
+    font-size: 0.8rem;
   }
 
   .export-bar__buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px;
+    gap: 5px;
     width: 100%;
   }
 
   .btn--export {
     width: 100%;
     justify-content: center;
+    font-size: 0.74rem;
+    padding: 0.45rem 0.35rem;
+    border-radius: 6px;
+  }
+
+  /* Attention Chips Grid */
+  .attention-card {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .attention-card__header {
+    margin-bottom: 0.5rem;
+    gap: 6px;
+  }
+
+  .attention-chips-grid {
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+  }
+
+  .attention-chip {
+    padding: 0.45rem 0.7rem !important;
+    border-radius: 6px !important;
+  }
+
+  .attention-chip__name {
+    font-size: 0.84rem;
+  }
+
+  .attention-chip__val {
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+
+  /* Cross-Test Multi-Biomarker Combinations */
+  .cross-test-section {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .cross-test-icon-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .cross-test-grid {
+    gap: 0.65rem;
+  }
+
+  .cross-test-item {
+    padding: 0.75rem 0.85rem;
+    border-radius: 8px;
+  }
+
+  .cross-test-item__headline h4 {
+    font-size: 0.88rem;
+  }
+
+  .cross-test-item__message {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .cross-test-item__questions {
+    padding: 0.5rem 0.65rem;
+    border-radius: 6px;
+  }
+
+  .cross-test-q-li {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  /* Trend Chart on Mobile */
+  .trend-section {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .trend-icon-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .trend-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+
+  .trend-card {
+    padding: 0.75rem 0.85rem !important;
+    border-radius: 8px !important;
+    gap: 0.5rem;
+  }
+
+  .trend-card__test-name {
+    font-size: 0.88rem;
+  }
+
+  .trend-values-row {
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+  }
+
+  .trend-val-num {
+    font-size: 0.98rem;
+  }
+
+  .trend-card__interpretation {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .trend-card__question {
+    padding: 0.35rem 0.55rem;
     font-size: 0.76rem;
-    padding: 0.5rem 0.4rem;
   }
 
   /* Result Cards on Mobile */
   .result {
-    padding: 0.9rem 0.85rem;
-    border-radius: var(--radius-md);
+    padding: 0.85rem !important;
   }
 
   .result__header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
+    margin-bottom: 0.65rem;
   }
 
   .result__title-wrap {
@@ -7688,12 +7901,13 @@ p {
   .result__badge-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 4px;
+    gap: 4px;
+    margin-bottom: 2px;
   }
 
-  .result__title {
-    font-size: 1.05rem;
+  .result__category-badge {
+    font-size: 0.7rem;
+    padding: 1px 5px;
   }
 
   .result__value-box {
@@ -7702,327 +7916,318 @@ p {
     justify-content: space-between;
     align-items: center;
     background: var(--surface-bg);
-    padding: 0.45rem 0.75rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
   }
 
   .result__value-num {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+  }
+
+  .result__value-unit {
+    font-size: 0.75rem;
   }
 
   /* Range Gauge on Mobile */
   .gauge-wrapper {
-    margin: 0.75rem 0 1rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .gauge__meta {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .gauge__range-label {
+    font-size: 0.8rem;
   }
 
   .gauge__display-track {
-    margin: 1.4rem 0 0.85rem;
+    margin: 1.2rem 0 0.65rem;
   }
 
   .gauge__track {
-    height: 10px;
+    height: 9px;
   }
 
   .gauge__zone-text {
-    display: none; /* Keep color bars clean and un-squished on mobile */
+    display: none;
   }
 
   .gauge__pin-badge {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     padding: 1px 5px;
+    border-radius: 4px;
   }
 
   .gauge__ticks {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
+    height: 14px;
   }
 
-  /* Form Card & Demographics */
-  .form-card {
-    padding: 1rem 0.85rem;
-    border-radius: var(--radius-md);
+  .result__message-box {
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
   }
 
-  .form-card__header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .result__message {
+    font-size: 0.85rem;
+    line-height: 1.45;
   }
 
-  .form-card__badges {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-between;
+  .result__urgency-box {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
   }
 
-  .btn--smart-paste-trigger {
-    width: 100%;
-    justify-content: center;
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+  .result__detail-toggle {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.8rem;
   }
 
-  .demographics-form-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.75rem;
+  .result__detail-body {
+    padding: 0.75rem;
+    gap: 0.65rem;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.85rem;
+  .detail-sub-title {
+    font-size: 0.78rem;
   }
 
-  .form-actions {
-    flex-direction: column;
-    gap: 10px;
+  .detail-sub-text,
+  .detail-reasons-list {
+    font-size: 0.8rem;
+    line-height: 1.35;
   }
 
-  .btn--submit {
-    width: 100%;
-    justify-content: center;
-    padding: 0.85rem 1.2rem;
-    font-size: 1rem;
+  .result__accordion-header-row {
+    padding: 0.45rem 0.65rem;
   }
 
-  .btn--clear {
-    width: 100%;
-    justify-content: center;
+  .result__accordion-toggle-btn {
+    font-size: 0.8rem;
   }
 
-  /* Smart Paste Modal on Mobile */
-  .modal-backdrop {
-    padding: 0;
-    align-items: flex-end;
+  .result__questions-list {
+    gap: 0.4rem;
   }
 
-  .smart-paste-modal {
-    max-height: 92vh;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-top-left-radius: var(--radius-xl);
-    border-top-right-radius: var(--radius-xl);
+  .result__question-item {
+    font-size: 0.8rem;
+    line-height: 1.35;
+    gap: 6px;
   }
 
-  .modal-header {
-    padding: 1rem;
+  .question-bullet {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    font-size: 0.7rem;
   }
 
-  .modal-body {
-    padding: 1rem;
-    max-height: calc(92vh - 140px);
+  /* General Questions Card on Mobile */
+  .general-questions-card {
+    padding: 0.85rem !important;
   }
 
-  .sample-paste-bar {
-    flex-direction: column;
-    align-items: flex-start;
+  .q-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
   }
 
-  .btn--sample-paste {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 6px 10px;
+  .general-question-item {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
   }
 
-  .smart-paste-textarea {
+  .general-question-bullet {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+  }
+
+  .general-question-text {
     font-size: 0.82rem;
-    padding: 0.75rem;
-    min-height: 120px;
   }
 
-  .modal-footer {
-    padding: 0.85rem 1rem;
-    flex-direction: column-reverse;
-    gap: 8px;
+  /* Scenarios Grid & Cards on Mobile */
+  .scenarios-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
   }
 
-  .modal-footer button {
-    width: 100%;
-    justify-content: center;
-    padding: 0.75rem;
+  .scenario-card {
+    padding: 0.85rem !important;
+    border-radius: 12px !important;
+    gap: 0.65rem;
+  }
+
+  .scenario-card__title {
+    font-size: 1rem !important;
+  }
+
+  .scenario-patient-row {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .scenario-context-text {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .scenario-values-preview {
+    padding: 0.5rem 0.65rem;
+    border-radius: 6px;
+  }
+
+  .val-preview-chip {
+    font-size: 0.7rem;
+    padding: 1px 5px;
+  }
+
+  .btn--scenario-launch {
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    border-radius: 8px;
   }
 
   /* Organ Systems Map on Mobile */
   .organ-systems-card {
-    padding: 1rem 0.85rem;
+    padding: 0.85rem !important;
   }
 
   .organ-systems-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
   }
 
   .organ-system-box__top {
-    padding: 0.85rem;
+    padding: 0.75rem;
   }
 
   .system-icon-wrap {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 
   .system-name {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .system-desc {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
   }
 
   /* What-If Simulator on Mobile */
   .what-if-card {
-    padding: 1rem 0.85rem;
-  }
-
-  .what-if-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .btn--reset-sim {
-    width: 100%;
-    justify-content: center;
+    padding: 0.85rem !important;
   }
 
   .sliders-grid {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
   }
 
   .slider-box {
-    padding: 0.85rem;
+    padding: 0.75rem;
   }
 
   .sim-range-input {
-    height: 28px;
+    height: 26px;
     touch-action: manipulation;
   }
 
   .sim-range-input::-webkit-slider-thumb {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
   }
 
   /* Lifestyle & Nutrition Plan on Mobile */
   .lifestyle-plan-card {
-    padding: 1rem 0.85rem;
+    padding: 0.85rem !important;
   }
 
   .protocol-columns-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
   }
 
   .food-column {
-    padding: 0.75rem;
+    padding: 0.65rem;
   }
 
-  .synergy-tip-box, .dietitian-q-box {
-    font-size: 0.82rem;
-    padding: 0.65rem 0.75rem;
+  .synergy-tip-box,
+  .dietitian-q-box {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.65rem;
   }
 
-  /* Attention Chips Grid */
-  .attention-chips-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.6rem;
+  /* Input Form & Filters on Mobile */
+  .form-card {
+    padding: 0.85rem !important;
   }
 
-  /* Results Toolbar */
   .results__toolbar {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
-  }
-
-  .filter-group {
-    overflow-x: auto;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
+    gap: 6px;
   }
 
   .filter-btn {
-    font-size: 0.78rem;
-    padding: 0.35rem 0.7rem;
+    font-size: 0.76rem;
+    padding: 0.3rem 0.6rem;
   }
 
   .btn--toggle-all {
     width: 100%;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.76rem;
+    padding: 0.4rem;
   }
 
   /* Floating Chat Launcher offset on Mobile */
   .chat-launcher-pill {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 72px) !important;
-    left: 12px !important;
-    padding: 8px 14px !important;
-    font-size: 0.85rem !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28) !important;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 68px) !important;
+    left: 10px !important;
+    padding: 7px 12px !important;
+    font-size: 0.8rem !important;
   }
 
   /* Chatbot Drawer on Mobile */
   .chatbot-drawer-container {
     width: 100% !important;
     max-width: 100% !important;
-    height: calc(100dvh - 20px) !important;
-    max-height: 95vh !important;
+    height: calc(100dvh - 15px) !important;
+    max-height: 96vh !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: none !important;
-  }
-
-  .chat-quick-prompts-track {
-    padding: 6px 10px;
-    gap: 6px;
-  }
-
-  .prompt-chip {
-    font-size: 0.75rem !important;
-    padding: 4px 8px !important;
-    white-space: nowrap;
-  }
-
-  .chat-input-bar {
-    padding: 8px 10px !important;
-  }
-
-  .chat-input-field {
-    font-size: 0.9rem !important;
-  }
-
-  .btn--chat-send {
-    width: 40px !important;
-    height: 40px !important;
+    border-radius: 16px 16px 0 0 !important;
   }
 }
 
 /* Small SmartPhones (<= 480px) */
 @media screen and (max-width: 480px) {
   .hero h1 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 
   .nav__brand-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
-  .card {
-    padding: 0.85rem 0.75rem;
-  }
-
+  .card,
   .result {
-    padding: 0.8rem 0.7rem;
+    padding: 0.75rem !important;
   }
 
   .range-gauge__limits {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
   }
 }
 
