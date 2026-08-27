@@ -100,3 +100,4 @@ export function generateLifestylePlan(abnormalItems: AnalysisItem[]): NutritionP
 
   return protocols;
 }
+
