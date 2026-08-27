@@ -59,3 +59,4 @@ $$\Delta\% = \frac{\text{Current Value} - \text{Previous Value}}{\text{Previous 
 
 - **Direction**: `increased`, `decreased`, `unchanged`
 - **Clinical Significance**: Flagged when change exceeds threshold ($\ge 10\%-15\%$) or moves between normal and abnormal ranges.
+

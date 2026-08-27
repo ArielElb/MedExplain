@@ -85,3 +85,4 @@ GitHub Pages hosts the `/docs` directory as a static website:
 2. Under **Build and deployment > Source**, select **Deploy from a branch**.
 3. Under **Branch**, select `main` and folder `/docs`.
 4. Click **Save**. The documentation site will be live at `https://arielelb.github.io/MedExplain/`.
+

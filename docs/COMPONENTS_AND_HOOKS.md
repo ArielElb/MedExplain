@@ -47,3 +47,4 @@ Controls Light / Dark mode.
 
 ### `VisitBriefPage.tsx` (`src/pages/VisitBriefPage.tsx`)
 - Dedicated doctor preparation sheet with printable A4 layout, interactive checklist, ranked questions, and doctor note lines.
+

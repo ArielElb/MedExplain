@@ -54,3 +54,4 @@ The system instruction (`CLINICAL_SYSTEM_INSTRUCTION`) strictly enforces:
 - **Educational Framing**: Explains concepts in accessible language; never delivers definitive medical diagnoses.
 - **Doctor Preparation**: Translates complex lab findings into focused, actionable questions for the general practitioner.
 - **Emergency Protocols**: Immediately prompts the user to seek emergency medical attention (MADA 101) if red-flag symptoms are described.
+

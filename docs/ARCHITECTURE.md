@@ -74,3 +74,4 @@ blood-test-app/
 │   ├── pages/                        # Home, Scenarios, Results, VisitBrief, About
 │   └── types/                        # TypeScript type definitions
 ```
+
