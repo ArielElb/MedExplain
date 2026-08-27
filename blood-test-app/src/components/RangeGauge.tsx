@@ -22,11 +22,11 @@ const RangeGauge: React.FC<Props> = ({ value, config, severity, referenceText, u
   const { visualMin, visualMax, normalMin, normalMax, warningMax } = config;
   const span = Math.max(visualMax - visualMin, 1);
 
-  // Calculate clamp percentage (3% to 97% so pin doesn't clip boundaries)
+  // Calculate clamp percentage (6% to 94% so pin badge never overflows mobile card edges)
   const rawPercent = ((value - visualMin) / span) * 100;
   const isBelowMin = value < visualMin;
   const isAboveMax = value > visualMax;
-  const clampedPercent = Math.min(Math.max(rawPercent, 3), 97);
+  const clampedPercent = Math.min(Math.max(rawPercent, 6), 94);
 
   // Calculate zone segment widths
   const isDoubleSided =
