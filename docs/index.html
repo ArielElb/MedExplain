@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedExplain AI — תיעוד ומדריך פיתוח מקיף</title>
+  <meta name="description" content="תיעוד טכני, קליני וארכיטקטוני מלא עבור פרויקט MedExplain AI — פענוח בדיקות דם, עוזר AI חכם וסיכום הכנה לפגישה עם רופא/ת המשפחה.">
+  <link rel="stylesheet" href="assets/docs.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2'><path d='M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'/></svg>">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="docs-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button id="menu-toggle" class="menu-toggle" aria-label="תפריט">☰</button>
+      <a href="#overview" class="header-brand">
+        <div class="brand-icon">🩺</div>
+        <div>
+          <span class="brand-name">MedExplain AI</span>
+          <span class="brand-badge">Docs v2.0</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="doc-search" class="search-input" placeholder="חיפוש מדד, ארכיטקטורה, פקודות או רכיב...">
+    </div>
+
+    <div class="header-actions">
+      <button id="theme-toggle" class="btn-header">🌙 מצב כהה</button>
+      <a href="https://github.com/ArielElb/MedExplain" target="_blank" rel="noopener noreferrer" class="btn-header btn-primary">
+        GitHub Repo ↗
+      </a>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-title">מבוא וארכיטקטורה</div>
+        <ul class="sidebar-nav">
+          <li><a href="#overview" class="sidebar-link active">📖 סקירה כללית ומטרות</a></li>
+          <li><a href="#privacy-model" class="sidebar-link">🛡️ מודל פרטיות 100% Client-Side</a></li>
+          <li><a href="#system-flow" class="sidebar-link">⚡ זרימת נתונים וארכיטקטורה</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">המנוע הקליני</div>
+        <ul class="sidebar-nav">
+          <li><a href="#biomarkers-catalog" class="sidebar-link">🔬 קטלוג 24 המדדים</a></li>
+          <li><a href="#cross-test-synergy" class="sidebar-link">🧩 שילובי מדדים (Cross-Test)</a></li>
+          <li><a href="#trends-delta" class="sidebar-link">📈 מעקב מגמות ושינויים</a></li>
+          <li><a href="#patient-scenarios" class="sidebar-link">👥 12 תרחישי מטופלים לדוגמה</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">בינה מלאכותית וצ'אט-בוט</div>
+        <ul class="sidebar-nav">
+          <li><a href="#dual-engine" class="sidebar-link">🤖 ארכיטקטורת Dual-Engine</a></li>
+          <li><a href="#gemini-integration" class="sidebar-link">✨ אינטגרציית Google Gemini</a></li>
+          <li><a href="#offline-engine" class="sidebar-link">⚡ מנוע קליני מקומי (Offline)</a></li>
+          <li><a href="#safety-guardrails" class="sidebar-link">🚨 בטיחות רפואית והנחיות</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">קוד ופיתוח</div>
+        <ul class="sidebar-nav">
+          <li><a href="#components-ref" class="sidebar-link">⚛️ עץ רכיבי React</a></li>
+          <li><a href="#custom-hooks" class="sidebar-link">🪝 Custom Hooks</a></li>
+          <li><a href="#theme-tokens" class="sidebar-link">🎨 מערכת עיצוב ו-Dark Mode</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-title">פריסה והתקנה</div>
+        <ul class="sidebar-nav">
+          <li><a href="#quickstart" class="sidebar-link">🚀 הרצה מקומית (Vite)</a></li>
+          <li><a href="#docker-guide" class="sidebar-link">🐳 Docker & Compose</a></li>
+          <li><a href="#render-deploy" class="sidebar-link">☁️ פריסה ב-Render</a></li>
+          <li><a href="#github-pages" class="sidebar-link">📄 GitHub Pages Docs</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-main">
+      <!-- Section 1: Overview -->
+      <section id="overview" class="docs-section">
+        <h1>MedExplain AI — תיעוד ומדריך מערכת מקיף</h1>
+        <p>
+          <strong>MedExplain AI</strong> היא מערכת קלינית מתקדמת, אינטראקטיבית וחינמית להסבר ופענוח בדיקות דם, המיועדת להעצים מטופלים, לפשט ערכים רפואיים סתומים, ולספק הכנה ממוקדת לפגישה עם רופא/ת המשפחה.
+        </p>
+
+        <div class="card-grid">
+          <div class="doc-card">
+            <div class="card-icon">🧠</div>
+            <h4>הקשר רפואי רחב (Synergy)</h4>
+            <p>ניתוח שילובי מדדים המצביעים על תבניות משותפות (כגון אנמיה מחוסר ברזל, תסמונת מטבולית או דלקת) ולא רק בחינה מבודדת של ערך בודד.</p>
+          </div>
+          <div class="doc-card">
+            <div class="card-icon">📈</div>
+            <h4>מעקב מגמות (Trends)</h4>
+            <p>השוואת תוצאות נוכחיות לבדיקות עבר, חישוב שינוי באחוזים (Delta %) והצגת חצי מגמה גרפיים עם פרשנות קלינית ברורה.</p>
+          </div>
+          <div class="doc-card">
+            <div class="card-icon">🤖</div>
+            <h4>עוזר AI חכם (MedBot)</h4>
+            <p>צ'אט-בוט אינטראקטיבי המשלב מנוע קליני מקומי מהיר וחיבור רשות למודלי Google Gemini (2.0/1.5 Flash) עם שאלות מותאמות אישית.</p>
+          </div>
+          <div class="doc-card">
+            <div class="card-icon">📄</div>
+            <h4>דף הכנה לרופא (Visit Brief)</h4>
+            <p>טופס מובנה, ממוקד ומוכן להדפסה (A4) עם צ'ק-ליסט שאלות מתועדפות ומקום להערות הרופא/ה.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Privacy Model -->
+      <section id="privacy-model" class="docs-section">
+        <h2>🛡️ מודל פרטיות 100% Client-Side</h2>
+        <p>
+          בניגוד לשירותי בריאות מקוונים רבים, <strong>MedExplain AI תוכננה מיומה הראשון עם אפס שרתים מרכזיים לעיבוד נתונים רפואיים</strong>:
+        </p>
+
+        <div class="callout callout--success">
+          <div class="callout-icon">🔒</div>
+          <div class="callout-content">
+            <p><strong>פרטיות מוחלטת מובטחת בארכיטקטורה:</strong> כל חישובי הנורמה, השילובים, טווחי הגילאים והמגמות מבוצעים בדפדפן של המשתמש בלבד (Local Execution). אין שמירה של תוצאות רפואיות בבסיסי נתונים חיצוניים.</p>
+          </div>
+        </div>
+
+        <ul>
+          <li><strong>היסטוריית בדיקות</strong>: נשמרת ב-<code>localStorage</code> של הדפדפן בלבד, וניתנת להפעלה, השבתה ומחיקה מלאה בלחיצה אחת.</li>
+          <li><strong>מפתחות Gemini API</strong>: נשמרים מקומית במכשיר המשתמש ונשלחים ישירות מקצה הדפדפן ל-Google, ללא שרתי ביניים (Proxy-Free).</li>
+        </ul>
+      </section>
+
+      <!-- Section 3: System Architecture Flow -->
+      <section id="system-flow" class="docs-section">
+        <h2>⚡ זרימת נתונים וארכיטקטורת המערכת</h2>
+        <p>תהליך עיבוד בדיקת הדם מתבצע ב-4 שלבים מובנים:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">System Architecture Flow</span>
+          </div>
+          <pre>
+┌────────────────────────┐      ┌────────────────────────┐      ┌────────────────────────┐
+│  1. קלט מטופל/ת       │ ───► │  2. מנוע קליני (Core) │ ───► │  3. סינרגיה ומגמות     │
+│  - ערכי בדיקה (24)     │      │  - התאמת גיל ומין       │      │  - Cross-Test Matrix   │
+│  - ערכי עבר (Deltas)   │      │  - סיווג חומרה (3 רמות) │      │  - חישוב % שינוי       │
+│  - תגיות רקע וגיל      │      │  - סרגלי RangeGauge    │      │  - דירוג שאלות לרופא   │
+└────────────────────────┘      └────────────────────────┘      └───────────┬────────────┘
+                                                                            │
+                                                                            ▼
+┌────────────────────────┐      ┌────────────────────────┐      ┌────────────────────────┐
+│  דף הכנה לרופא (Print) │ ◄─── │  תובנות AI וצ'אט-בוט  │ ◄─── │  4. תצוגת תוצאות       │
+│  - A4 Sheet מובנה      │      │  - Gemini 2.0 / 1.5    │      │  - Summary Cards       │
+│  - צ'ק-ליסט שאלות      │      │  - Offline Smart Engine│      │  - סרגלי מדדים מפורטים │
+└────────────────────────┘      └────────────────────────┘      └────────────────────────┘</pre>
+        </div>
+      </section>
+
+      <!-- Section 4: Biomarkers Catalog -->
+      <section id="biomarkers-catalog" class="docs-section">
+        <h2>🔬 קטלוג 24 המדדים (Biomarker Engine)</h2>
+        <p>המערכת כוללת תמיכה מלאה ב-24 מדדי מעבדה חיוניים, המסודרים ב-5 קטגוריות קליניות:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>שם המדד</th>
+                <th>קיצור</th>
+                <th>קטגוריה</th>
+                <th>יחידת מידה</th>
+                <th>טווח נורמה סטנדרטי</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="biomarker-row"><td>המוגלובין</td><td>Hb</td><td>ספירת דם (CBC)</td><td>g/dL</td><td>גבר: 13.5-17.5 | אישה: 12.0-15.5</td></tr>
+              <tr class="biomarker-row"><td>פריטין (מאגרי ברזל)</td><td>Ferritin</td><td>ספירת דם ומאגרים</td><td>ng/mL</td><td>גבר: 24-336 | אישה: 11-307</td></tr>
+              <tr class="biomarker-row"><td>ברזל בסרום</td><td>Iron</td><td>ספירת דם ומאגרים</td><td>mcg/dL</td><td>60 - 170</td></tr>
+              <tr class="biomarker-row"><td>טסיות דם</td><td>PLT</td><td>ספירת דם (CBC)</td><td>K/uL</td><td>150 - 450</td></tr>
+              <tr class="biomarker-row"><td>כדוריות דם לבנות</td><td>WBC</td><td>ספירת דם ודלקת</td><td>K/uL</td><td>4.5 - 11.0</td></tr>
+              <tr class="biomarker-row"><td>מדד דלקת CRP</td><td>CRP</td><td>מדדי דלקת</td><td>mg/L</td><td>0.0 - 5.0</td></tr>
+              <tr class="biomarker-row"><td>סוכר בצום (גלוקוז)</td><td>GLU</td><td>סוכר ומטבוליזם</td><td>mg/dL</td><td>70 - 99</td></tr>
+              <tr class="biomarker-row"><td>המוגלובין מסוכרר</td><td>HbA1c</td><td>סוכר ומטבוליזם</td><td>%</td><td>4.0 - 5.6%</td></tr>
+              <tr class="biomarker-row"><td>כולסטרול כללי</td><td>CHOL</td><td>שומני דם (Lipids)</td><td>mg/dL</td><td>120 - 199</td></tr>
+              <tr class="biomarker-row"><td>כולסטרול 'רע' LDL</td><td>LDL</td><td>שומני דם (Lipids)</td><td>mg/dL</td><td>&lt; 100</td></tr>
+              <tr class="biomarker-row"><td>כולסטרול 'טוב' HDL</td><td>HDL</td><td>שומני דם (Lipids)</td><td>mg/dL</td><td>גבר: &gt; 40 | אישה: &gt; 50</td></tr>
+              <tr class="biomarker-row"><td>טריגליצרידים</td><td>TRIG</td><td>שומני דם (Lipids)</td><td>mg/dL</td><td>&lt; 150</td></tr>
+              <tr class="biomarker-row"><td>תפקודי כליות (קריאטינין)</td><td>CREA</td><td>תפקודי כליות</td><td>mg/dL</td><td>0.6 - 1.2</td></tr>
+              <tr class="biomarker-row"><td>קצב סינון כלייתי</td><td>eGFR</td><td>תפקודי כליות</td><td>mL/min/1.73m²</td><td>&gt; 90</td></tr>
+              <tr class="biomarker-row"><td>אנזימי כבד ALT</td><td>ALT / GPT</td><td>תפקודי כבד</td><td>U/L</td><td>7 - 56</td></tr>
+              <tr class="biomarker-row"><td>אנזימי כבד AST</td><td>AST / GOT</td><td>תפקודי כבד</td><td>U/L</td><td>10 - 40</td></tr>
+              <tr class="biomarker-row"><td>בלוטת התריס TSH</td><td>TSH</td><td>אנדוקרינולוגיה</td><td>mIU/L</td><td>0.4 - 4.2</td></tr>
+              <tr class="biomarker-row"><td>ויטמין D</td><td>Vit D</td><td>ויטמינים ומאגרים</td><td>ng/mL</td><td>30 - 100</td></tr>
+              <tr class="biomarker-row"><td>ויטמין B12</td><td>Vit B12</td><td>ויטמינים ומאגרים</td><td>pg/mL</td><td>200 - 900</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 5: Cross-Test Synergy -->
+      <section id="cross-test-synergy" class="docs-section">
+        <h2>🧩 שילובי מדדים (Cross-Test Matrix)</h2>
+        <p>
+          מנוע הסינרגיה מזהה דפוסים רב-מדדיים ומפיק תובנות על התמונה הכוללת:
+        </p>
+
+        <div class="card-grid">
+          <div class="doc-card">
+            <span class="badge badge--danger">אנמיה וחוסר ברזל</span>
+            <h4>המוגלובין נמוך + פריטין נמוך + ברזל נמוך</h4>
+            <p>מעיד על אנמיה כתוצאה מריקון מאגרי הברזל בגוף. המערכת מייצרת המלצות לשאלות על תוספי ברזל, מקור הדימום ובדיקות ספיגה.</p>
+          </div>
+          <div class="doc-card">
+            <span class="badge badge--warning">דפוס מטבולי משולב</span>
+            <h4>טריגליצרידים גבוהים + HDL נמוך + גלוקוז גבוה</h4>
+            <p>דפוס אופייני לתנגודת לאינסולין ולתסמונת מטבולית. המערכת מדגישה כיווני תזונה דלת סוכרים פשוטים ופעילות אירובית.</p>
+          </div>
+          <div class="doc-card">
+            <span class="badge badge--danger">תגובה דלקתית פעילה</span>
+            <h4>WBC גבוה + CRP גבוה</h4>
+            <p>שילוב המעיד על פעילות מוגברת של מערכת החיסון עקב תהליך זיהומי או דלקתי חריף/כרוני.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Dual-Engine AI -->
+      <section id="dual-engine" class="docs-section">
+        <h2>🤖 ארכיטקטורת Dual-Engine AI</h2>
+        <p>
+          העוזר הרפואי פועל במודל היברידי כפול המאפשר גמישות מקסימלית:
+        </p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Dual-Engine Implementation (src/lib/ai/geminiService.ts)</span>
+            <button class="btn-copy-code">Copy</button>
+          </div>
+          <pre><code>// Dynamic Google Gemini Model Discovery & REST fallback
+export const validateGeminiApiKey = async (key: string) => {
+  const cleanKey = sanitizeApiKey(key);
+  // 1. Queries GET /v1beta/models to discover active models for this account
+  const models = await fetchAvailableModelsForKey(cleanKey);
+  
+  // 2. Tests ping on the best candidate (gemini-2.0-flash / gemini-1.5-flash)
+  const result = await callGeminiRest(cleanKey, models[0], "Ping test", ...);
+  return { valid: true, activeModel: models[0] };
+};</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 7: Quickstart -->
+      <section id="quickstart" class="docs-section">
+        <h2>🚀 הרצה מקומית ופיתוח (Quickstart)</h2>
+        <p>דרישות קדם: <code>Node.js 18+</code> ו-<code>npm</code>.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Bash / Terminal</span>
+            <button class="btn-copy-code">Copy</button>
+          </div>
+          <pre><code># 1. שיבוט המאגר
+git clone https://github.com/ArielElb/MedExplain.git
+cd MedExplain/blood-test-app
+
+# 2. התקנת תלויות
+npm install
+
+# 3. הרצת שרת פיתוח
+npm run dev
+
+# 4. בדיקת טיפוסים ובניית גרסת Production
+npm run typecheck
+npm run build</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 8: Docker & Deployment -->
+      <section id="docker-guide" class="docs-section">
+        <h2>🐳 פריסה עם Docker ו-Render</h2>
+        <p>הפרויקט כולל <code>Dockerfile</code> מבוסס Multi-stage build עם Nginx וקובץ <code>render.yaml</code> מוכן לפריסה אוטומטית.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Docker Commands</span>
+            <button class="btn-copy-code">Copy</button>
+          </div>
+          <pre><code># בניית ה-Container
+docker build -t medexplain-app .
+
+# הרצת ה-Container על פורט 80
+docker run -d -p 80:80 --name medexplain medexplain-app</code></pre>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="assets/docs.js"></script>
+</body>
+</html>

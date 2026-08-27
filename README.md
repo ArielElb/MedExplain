@@ -18,11 +18,11 @@
 
 | מסמך תיעוד | תיאור |
 | :--- | :--- |
-| 📖 **[System Architecture](../docs/ARCHITECTURE.md)** | ארכיטקטורת המערכת, זרימת נתונים ומודל הפרטיות (100% Client-Side). |
-| 🔬 **[Clinical Engine](../docs/CLINICAL_ENGINE.md)** | פירוט 24 המדדים, טווחי נורמה לפי גיל/מין, חוקי שילובים ומגמות. |
-| 🤖 **[AI & Chatbot Guide](../docs/AI_AND_CHATBOT.md)** | ארכיטקטורת Dual-Engine, זיהוי דגמים דינמי (Gemini REST) ומנוע מקומי. |
-| ⚛️ **[Components & Hooks](../docs/COMPONENTS_AND_HOOKS.md)** | עץ הרכיבים, ממשקי Props ו-Custom Hooks. |
-| 🚀 **[Deployment Guide](../docs/DEPLOYMENT.md)** | מדריכי פריסה מפורטים ל-Docker, Render, Vite ו-GitHub Pages. |
+| 📖 **[System Architecture](docs/ARCHITECTURE.md)** | ארכיטקטורת המערכת, זרימת נתונים ומודל הפרטיות (100% Client-Side). |
+| 🔬 **[Clinical Engine](docs/CLINICAL_ENGINE.md)** | פירוט 24 המדדים, טווחי נורמה לפי גיל/מין, חוקי שילובים ומגמות. |
+| 🤖 **[AI & Chatbot Guide](docs/AI_AND_CHATBOT.md)** | ארכיטקטורת Dual-Engine, זיהוי דגמים דינמי (Gemini REST) ומנוע מקומי. |
+| ⚛️ **[Components & Hooks](docs/COMPONENTS_AND_HOOKS.md)** | עץ הרכיבים, ממשקי Props ו-Custom Hooks. |
+| 🚀 **[Deployment Guide](docs/DEPLOYMENT.md)** | מדריכי פריסה מפורטים ל-Docker, Render, Vite ו-GitHub Pages. |
 
 ---
 
