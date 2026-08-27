@@ -9,6 +9,8 @@ import {
   ShieldCheck,
   Sun,
   Moon,
+  Bot,
+  Sparkles,
 } from 'lucide-react';
 import { NavigationPage } from '../types';
 
@@ -19,6 +21,7 @@ interface Props {
   resultsCount: number;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
+  onOpenChat?: () => void;
 }
 
 const Navbar: React.FC<Props> = ({
@@ -28,6 +31,7 @@ const Navbar: React.FC<Props> = ({
   resultsCount,
   theme,
   onToggleTheme,
+  onOpenChat,
 }) => {
   const navItems = [
     { id: 'home' as NavigationPage, label: 'ראשי', fullLabel: 'עמוד ראשי', icon: <Home size={19} /> },
@@ -114,8 +118,21 @@ const Navbar: React.FC<Props> = ({
             </ul>
           </nav>
 
-          {/* Actions (Theme toggle + Privacy Pill) */}
+          {/* Actions (Chat button + Theme toggle + Privacy Pill) */}
           <div className="navbar__actions">
+            {onOpenChat && (
+              <button
+                type="button"
+                className="btn--nav-chat"
+                onClick={onOpenChat}
+                title="שאל את עוזר ה-AI של האתר"
+              >
+                <Bot size={17} />
+                <span className="nav-chat-label">עוזר AI</span>
+                <Sparkles size={11} className="nav-chat-sparkle" />
+              </button>
+            )}
+
             <button
               type="button"
               className="theme-toggle-btn"

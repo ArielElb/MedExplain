@@ -5,19 +5,25 @@ import ScenariosPage from './pages/ScenariosPage';
 import ResultsPage from './pages/ResultsPage';
 import VisitBriefPage from './pages/VisitBriefPage';
 import AboutPage from './pages/AboutPage';
+import ChatLauncher from './components/Chatbot/ChatLauncher';
+import ChatbotDrawer from './components/Chatbot/ChatbotDrawer';
 import { useAnalysis } from './hooks/useAnalysis';
 import { useLocalHistory } from './hooks/useLocalHistory';
 import { useTheme } from './hooks/useTheme';
+import { getStoredApiKey } from './lib/ai/geminiService';
 import { NavigationPage, PatientContext, PatientScenario, AnalysisResult } from './types';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<NavigationPage>('home');
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const { result, errors, analyze, analyzeDirect, setResult } = useAnalysis();
   const history = useLocalHistory();
   const { theme, toggleTheme } = useTheme();
 
   const [formInitialValues, setFormInitialValues] = useState<Record<string, string>>({});
   const [patientContext, setPatientContext] = useState<PatientContext | undefined>(undefined);
+
+  const isAiConnected = Boolean(getStoredApiKey());
 
   const handleNavigate = (page: NavigationPage) => {
     setActivePage(page);
@@ -93,6 +99,7 @@ const App: React.FC = () => {
         resultsCount={result ? result.analysis.length : 0}
         theme={theme}
         onToggleTheme={toggleTheme}
+        onOpenChat={() => setIsChatOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -117,6 +124,7 @@ const App: React.FC = () => {
             initialPatient={patientContext}
             onSubmitForm={handleSubmitForm}
             onNavigateToVisitBrief={() => handleNavigate('visit-brief')}
+            onOpenChat={() => setIsChatOpen(true)}
             history={{
               items: history.items,
               enabled: history.enabled,
@@ -138,6 +146,21 @@ const App: React.FC = () => {
 
         {activePage === 'about' && <AboutPage />}
       </main>
+
+      {/* Mini AI Chatbot Floating Launcher & Drawer */}
+      <ChatLauncher
+        isOpen={isChatOpen}
+        onToggle={() => setIsChatOpen(!isChatOpen)}
+        hasResults={Boolean(result)}
+        isAiConnected={isAiConnected}
+      />
+
+      <ChatbotDrawer
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        result={result}
+        patient={patientContext}
+      />
 
       {/* App Footer */}
       <footer className="footer no-print">

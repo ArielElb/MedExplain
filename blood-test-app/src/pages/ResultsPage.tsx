@@ -24,6 +24,7 @@ interface Props {
     previousValues?: Record<string, number>
   ) => void;
   onNavigateToVisitBrief: () => void;
+  onOpenChat?: () => void;
   history: {
     items: AnalysisResult[];
     enabled: boolean;
@@ -42,6 +43,7 @@ const ResultsPage: React.FC<Props> = ({
   initialPatient,
   onSubmitForm,
   onNavigateToVisitBrief,
+  onOpenChat,
   history,
 }) => {
   const [isFormOpen, setIsFormOpen] = useState(!result);
@@ -136,6 +138,7 @@ const ResultsPage: React.FC<Props> = ({
           <ResultsList
             result={result}
             onNavigateToVisitBrief={onNavigateToVisitBrief}
+            onOpenChat={onOpenChat}
           />
         </div>
       )}

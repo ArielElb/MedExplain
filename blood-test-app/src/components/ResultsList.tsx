@@ -7,6 +7,7 @@ import ExportBar from './ExportBar';
 import CrossTestCard from './CrossTestCard';
 import TrendChart from './TrendChart';
 import PatientHeader from './PatientHeader';
+import AiInsightsCard from './AiInsightsCard';
 import {
   MessageSquareQuote,
   Filter,
@@ -21,11 +22,16 @@ import {
 interface Props {
   result: AnalysisResult;
   onNavigateToVisitBrief?: () => void;
+  onOpenChat?: () => void;
 }
 
 type FilterType = 'all' | 'danger' | 'warning' | 'normal';
 
-const ResultsList: React.FC<Props> = ({ result, onNavigateToVisitBrief }) => {
+const ResultsList: React.FC<Props> = ({
+  result,
+  onNavigateToVisitBrief,
+  onOpenChat,
+}) => {
   const [filter, setFilter] = useState<FilterType>('all');
   const [allExpanded, setAllExpanded] = useState<boolean>(true);
   const [copiedQuestions, setCopiedQuestions] = useState<boolean>(false);
@@ -63,6 +69,13 @@ const ResultsList: React.FC<Props> = ({ result, onNavigateToVisitBrief }) => {
     <section className="results">
       {/* Patient Header */}
       {result.patient && <PatientHeader patient={result.patient} />}
+
+      {/* AI Clinical Insights Narrative */}
+      <AiInsightsCard
+        result={result}
+        patient={result.patient}
+        onOpenChat={onOpenChat || (() => {})}
+      />
 
       {/* Summary Metrics */}
       <SummaryCard summary={result.summary} createdAt={result.createdAt} />
@@ -103,82 +116,77 @@ const ResultsList: React.FC<Props> = ({ result, onNavigateToVisitBrief }) => {
         </div>
       )}
 
-      {/* "התמונה הכוללת" - Cross-Test Combination Insights */}
-      {result.contextFindings && result.contextFindings.length > 0 && (
+      {/* "התמונה הכוללת" - Multi-Biomarker Combinations */}
+      {result.contextFindings.length > 0 && (
         <CrossTestCard findings={result.contextFindings} />
       )}
 
-      {/* "מגמות ושינויים" - Trend Engine Delta Visualizations */}
-      {result.trends && result.trends.length > 0 && (
-        <TrendChart trends={result.trends} />
-      )}
+      {/* "מגמות ושינויים" - Historical Trend Deltas */}
+      {result.trends.length > 0 && <TrendChart trends={result.trends} />}
 
-      {/* Results Controls & Filters */}
-      <div className="results-toolbar no-print">
-        <div className="results-toolbar__filter-group">
-          <span className="results-toolbar__label">
-            <Filter size={15} />
-            <span>הצג פירוט:</span>
+      {/* Filter and Accordion Control Bar */}
+      <div className="results__toolbar no-print">
+        <div className="filter-group">
+          <span className="filter-label">
+            <Filter size={15} /> סינון תצוגה:
           </span>
-
-          <div className="results-filter-pills">
-            <button
-              type="button"
-              className={`filter-pill ${filter === 'all' ? 'filter-pill--active' : ''}`}
-              onClick={() => setFilter('all')}
-            >
-              הכל ({result.analysis.length})
-            </button>
-
-            {dangerCount > 0 && (
-              <button
-                type="button"
-                className={`filter-pill filter-pill--danger ${filter === 'danger' ? 'filter-pill--active' : ''}`}
-                onClick={() => setFilter('danger')}
-              >
-                חריגים ({dangerCount})
-              </button>
-            )}
-
-            {warningCount > 0 && (
-              <button
-                type="button"
-                className={`filter-pill filter-pill--warning ${filter === 'warning' ? 'filter-pill--active' : ''}`}
-                onClick={() => setFilter('warning')}
-              >
-                גבוליים ({warningCount})
-              </button>
-            )}
-
-            {normalCount > 0 && (
-              <button
-                type="button"
-                className={`filter-pill filter-pill--normal ${filter === 'normal' ? 'filter-pill--active' : ''}`}
-                onClick={() => setFilter('normal')}
-              >
-                תקינים ({normalCount})
-              </button>
-            )}
-          </div>
-        </div>
-
-        <div className="results-toolbar__actions">
           <button
             type="button"
-            className="btn--ghost btn--small"
-            onClick={() => setAllExpanded(!allExpanded)}
+            className={`filter-btn ${filter === 'all' ? 'filter-btn--active' : ''}`}
+            onClick={() => setFilter('all')}
           >
-            {allExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
-            <span>{allExpanded ? 'כווץ שאלות' : 'פתח שאלות'}</span>
+            הכל ({result.analysis.length})
           </button>
+          {dangerCount > 0 && (
+            <button
+              type="button"
+              className={`filter-btn filter-btn--danger ${
+                filter === 'danger' ? 'filter-btn--active' : ''
+              }`}
+              onClick={() => setFilter('danger')}
+            >
+              חריגים ({dangerCount})
+            </button>
+          )}
+          {warningCount > 0 && (
+            <button
+              type="button"
+              className={`filter-btn filter-btn--warning ${
+                filter === 'warning' ? 'filter-btn--active' : ''
+              }`}
+              onClick={() => setFilter('warning')}
+            >
+              גבוליים ({warningCount})
+            </button>
+          )}
+          {normalCount > 0 && (
+            <button
+              type="button"
+              className={`filter-btn filter-btn--normal ${
+                filter === 'normal' ? 'filter-btn--active' : ''
+              }`}
+              onClick={() => setFilter('normal')}
+            >
+              תקינים ({normalCount})
+            </button>
+          )}
         </div>
+
+        <button
+          type="button"
+          className="btn--toggle-all"
+          onClick={() => setAllExpanded(!allExpanded)}
+        >
+          {allExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          <span>{allExpanded ? 'כווץ את כל השאלות' : 'פתח את כל השאלות'}</span>
+        </button>
       </div>
 
-      {/* Results List Grid */}
+      {/* Biomarker Result Cards Grid */}
       <div className="results__grid">
         {filteredItems.map((item) => (
           <ResultCard
-            key={`${item.markerId}-${allExpanded}`}
+            key={item.markerId}
             item={item}
             defaultExpanded={allExpanded}
           />
@@ -191,33 +199,34 @@ const ResultsList: React.FC<Props> = ({ result, onNavigateToVisitBrief }) => {
           <div className="card__header">
             <div className="general-questions-header">
               <div className="q-icon-wrap">
-                <MessageSquareQuote size={22} className="icon-general-q" />
+                <MessageSquareQuote size={24} />
               </div>
               <div>
-                <h2>שאלות מומלצות וממוקדות לרופא/ת המשפחה</h2>
+                <h2>שאלות מומלצות לשיחה עם הרופא/ה</h2>
                 <p className="muted small">
-                  רשימה מדורגת שנבנתה מתוך שילובי המדדים, המגמות והחריגות הספציפיות שלך
+                  שאלות מתועדפות ומדורגות לפי חשיבות קלינית, שילובי מדדים ומגמות בבדיקה שלך
                 </p>
               </div>
             </div>
 
-            <div className="general-questions-actions no-print">
+            <div className="doctor-prep-actions no-print">
               <button
                 type="button"
                 className="btn--copy-pill"
                 onClick={handleCopyRankedQuestions}
               >
                 {copiedQuestions ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copiedQuestions ? 'הועתק!' : 'העתקת כל השאלות'}</span>
+                <span>{copiedQuestions ? 'הועתק ללוח!' : 'העתק את כל השאלות'}</span>
               </button>
+
               {onNavigateToVisitBrief && (
                 <button
                   type="button"
-                  className="btn--primary-outline btn--small"
+                  className="btn--export-visit-brief btn--small"
                   onClick={onNavigateToVisitBrief}
                 >
                   <FileSpreadsheet size={15} />
-                  <span>עבור לדף "הכנה לרופא"</span>
+                  <span>עבור לדף הכנה מלא לרופא</span>
                 </button>
               )}
             </div>
@@ -234,8 +243,8 @@ const ResultsList: React.FC<Props> = ({ result, onNavigateToVisitBrief }) => {
         </div>
       )}
 
-      {/* Disclaimer */}
-      <Disclaimer text={result.disclaimer} />
+      {/* Safety Medical Disclaimer */}
+      <Disclaimer />
     </section>
   );
 };
