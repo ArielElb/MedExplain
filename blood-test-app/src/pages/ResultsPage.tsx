@@ -47,7 +47,6 @@ const ResultsPage: React.FC<Props> = ({
   history,
 }) => {
   const [isFormOpen, setIsFormOpen] = useState(!result);
-  const resultsRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = (
@@ -57,22 +56,18 @@ const ResultsPage: React.FC<Props> = ({
   ) => {
     onSubmitForm(values, patient, previousValues);
     setIsFormOpen(false);
-    setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectHistory = (item: AnalysisResult) => {
     history.select(item);
     setIsFormOpen(false);
-    setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="results-page">
-      {/* Header if no result yet */}
+      {/* Header only if no result yet */}
       {!result && (
         <header className="page-header text-center">
           <div className="page-header__badge">
@@ -85,12 +80,6 @@ const ResultsPage: React.FC<Props> = ({
           </p>
         </header>
       )}
-
-      {/* Privacy and Medical Disclaimer Notices */}
-      <div className="notices-grid no-print">
-        <PrivacyNote />
-        <Disclaimer />
-      </div>
 
       {/* Form Collapsible Accordion Toolbar (when result exists) */}
       {result && (
@@ -134,7 +123,7 @@ const ResultsPage: React.FC<Props> = ({
 
       {/* Analysis Results Display */}
       {result && (
-        <div ref={resultsRef} className="results-wrapper">
+        <div className="results-wrapper">
           <ResultsList
             result={result}
             onNavigateToVisitBrief={onNavigateToVisitBrief}
@@ -153,6 +142,12 @@ const ResultsPage: React.FC<Props> = ({
         onDelete={history.remove}
         onClearAll={history.clearAll}
       />
+
+      {/* Privacy and Medical Disclaimer Notices at the bottom */}
+      <div className="notices-grid no-print" style={{ marginTop: '2rem' }}>
+        <PrivacyNote />
+        <Disclaimer />
+      </div>
     </div>
   );
 };

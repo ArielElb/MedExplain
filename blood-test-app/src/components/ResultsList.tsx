@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { AnalysisResult } from '../types';
 import ResultCard from './ResultCard';
 import SummaryCard from './SummaryCard';
-import Disclaimer from './Disclaimer';
 import ExportBar from './ExportBar';
 import CrossTestCard from './CrossTestCard';
 import TrendChart from './TrendChart';
@@ -80,15 +79,15 @@ const ResultsList: React.FC<Props> = ({
       {/* Patient Header */}
       {result.patient && <PatientHeader patient={result.patient} />}
 
+      {/* Summary Metrics */}
+      <SummaryCard summary={result.summary} createdAt={result.createdAt} />
+
       {/* AI Clinical Insights Narrative */}
       <AiInsightsCard
         result={result}
         patient={result.patient}
         onOpenChat={onOpenChat || (() => {})}
       />
-
-      {/* Summary Metrics */}
-      <SummaryCard summary={result.summary} createdAt={result.createdAt} />
 
       {/* Action / Export Toolbar */}
       <ExportBar
@@ -325,9 +324,6 @@ const ResultsList: React.FC<Props> = ({
           )}
         </>
       )}
-
-      {/* Safety Medical Disclaimer */}
-      <Disclaimer />
     </section>
   );
 };
